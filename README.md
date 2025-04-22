@@ -75,3 +75,4 @@ def wrangle(collection):
 
 
 ---
+Open the Notebook: [Open Nairobi_Air_Quality.ipynb](https://github.com/evansnjagi/Time-Series/blob/Data-Preprocessing/Nairobi_Air_Quality.ipynb)

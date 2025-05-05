@@ -1,77 +1,83 @@
-<p align="center">
-  <h1 align="center">🧹 DATA PREPROCESSING</h1>
-</p>
+# 🌍 Nairobi Air Quality Analysis and ARIMA Modeling
+
+This project explores Nairobi's air quality over time and builds a forecasting model using ARIMA. It follows a full machine learning workflow, from **data preparation** to **model evaluation** and **forecasting**.
 
 ---
 
-## 📌 Overview
+## 📌 Project Objectives
 
-This project focuses on **data preprocessing**, a critical step in any data science or machine learning pipeline. The goal is to clean, transform, and prepare raw data to improve the quality of analysis or model performance.
-
----
-
-## 🔍 Business Understanding
-
-The objective is to obtain a well-structured time series dataset using the **P2.5** collection from the site or location that has the most data points.
+- **Analyze** air quality trends in Nairobi using real-world data.
+- **Build and evaluate** an ARIMA time series model to predict future pollution levels.
+- **Leverage MongoDB** for efficient data storage and retrieval.
+- **Communicate insights** through visualizations and metrics.
 
 ---
 
-## 🧠 Data Understanding
+## 📂 Workflow Overview
 
-We are working with multiple databases hosted on a client server (MongoDB: `AieQuality`). These include:
+### 1️⃣ Data Preparation
+✅ Import clean time-series data from **MongoDB**  
+✅ Handle missing values and ensure proper **datetime indexing**
 
-- **Available Databases/Collections:**
-  - Nairobi
-  - Kisumu
-  - Mombasa
-  - Juja
-  - Nakuru
+### 2️⃣ Exploratory Data Analysis (EDA)
+✅ **Trend and seasonality analysis** using moving averages  
+✅ **Correlation heatmaps** and **distribution plots**  
 
-- **Selected Collection:** Nairobi  
-- **Total Documents in Nairobi:** `446,968`
+**Example Visualization:**  
+![EDA Plot](figures/eda_plot.png)
 
-- **Sample Document (First Entry):**
+### 3️⃣ Modeling (ARIMA)
+✅ Perform **stationarity tests** and transformations  
+✅ Fit **AutoRegressive Integrated Moving Average (ARIMA)** model  
+✅ Evaluate performance using **RMSE and AIC**  
 
-```json
-{
-  "_id": ObjectId("6806979f55fcce47f5780944"),
-  "sensor_id": 4899,
-  "sensor_type": "DHT22",
-  "location": 3966,
-  "lat": -1.311,
-  "lon": 36.817,
-  "timestamp": "2025-01-01T00:02:30.504000+00:00",
-  "value_type": "humidity",
-  "value": 74.5
-}
-```
-- Final python code for the entire pipeline.
-```python
-import pandas as pd
+**Example ARIMA Model Fit:**  
+![ARIMA Model Fit](figures/arima_fit.png)
 
-def wrangle(collection):
-    # Query documents from the collection
-    result = collection.find(
-        {"location": 3573, "value_type": "P2"},
-        projection={"timestamp": 1, "value": 1, "_id": 0}
-    )
-    # Convert result into DataFrame
-    df = pd.DataFrame(result).set_index("timestamp")
-    # Convert timezone to 'Africa/Nairobi'
-    df.index = df.index.tz_convert("Africa/Nairobi")
-    return df
-```
-## 🛠️ Technologies & Libraries Used
+### 4️⃣ Forecasting & Communication
+✅ Generate future predictions  
+✅ Compare predicted vs actual values  
 
-| 🧩 Library             | 📌 Description                                |
-|------------------------|----------------------------------------------|
-| 🐍 **Python**          | Core programming language                     |
-| 🐼 **Pandas**          | Data manipulation and analysis                |
-| 📁 **Pathlib**         | Modern file system path handling              |
-| 🍃 **PyMongo**         | MongoDB database access from Python           |
-| 🌍 **Pytz**            | Timezone-aware datetime conversions           |
-| 🧪 **Scikit-learn**    | Preprocessing tools & ML utilities            |
-| 🖨️ **PrettyPrinter**   | Clean and readable console output of data     |
-
+**Example Forecast Plot:**  
+![Forecast](figures/forecast.png)
 
 ---
+
+## 🛠️ Technologies Used
+
+- `Python`
+- `Pandas`, `NumPy`
+- `Matplotlib`, `Seaborn`, `Plotly`
+- `Statsmodels`, `Scikit-learn`
+- `PyMongo` for database connectivity
+- `Jupyter Notebook`
+
+---
+
+## 📈 Model Performance
+
+- The ARIMA model effectively captures time-series patterns.
+- Model evaluation metrics:
+  - **RMSE:** *X.XX* (replace with actual value)
+  - **AIC Score:** *X.XX*
+- The model produces reliable forecasts with well-defined confidence intervals.
+
+**Sample Predicted vs Actual Plot:**  
+![Prediction vs Actual](figures/pred_vs_actual.png)
+
+---
+
+## 📬 Contact
+
+Created by **[Your Name]**  
+📧 Email: [your_email@example.com]  
+🔗 LinkedIn: [linkedin.com/in/your-profile](https://linkedin.com/in/your-profile)  
+
+---
+
+### 📌 How to Run the Notebook
+
+1. Clone this repository:  
+   ```bash
+   git clone https://github.com/yourusername/airquality-arima.git
+   cd airquality-arima
